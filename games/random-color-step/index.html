@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>隨機顏色踩踏</title>
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <main class="app-shell">
+    <section class="topbar">
+      <a class="back-link" href="../../index.html">返回遊戲入口</a>
+      <div class="title-group">
+        <p class="eyebrow">Color Step</p>
+        <h1>隨機顏色踩踏</h1>
+        <p class="subtitle">每回合會亮起 1 到 2 個區塊，小朋友照著位置踩對應的巧拼。</p>
+      </div>
+    </section>
+
+    <section class="controls" aria-label="遊戲控制">
+      <button id="nextRoundBtn" class="primary-btn" type="button">開始下一回合</button>
+      <button id="autoModeBtn" class="secondary-btn" type="button" aria-pressed="false">開啟自動連續</button>
+      <label class="speed-control" for="hideDelay">
+        顯示秒數
+        <input id="hideDelay" type="range" min="1" max="6" step="1" value="3">
+        <span id="hideDelayValue">3 秒</span>
+      </label>
+      <label class="speed-control" for="roundGap">
+        題目間隔
+        <input id="roundGap" type="range" min="1" max="6" step="1" value="2">
+        <span id="roundGapValue">2 秒</span>
+      </label>
+      <div class="status-card" aria-live="polite">
+        <span class="status-label">目前狀態</span>
+        <strong id="statusText">按下按鈕開始</strong>
+      </div>
+    </section>
+
+    <section class="board-wrap">
+      <div class="board" id="board" aria-label="四等份顏色版">
+        <button class="quadrant q1" data-name="紅色 左上" data-color="red" type="button">
+          <span>左上</span>
+          <strong>紅色</strong>
+        </button>
+        <button class="quadrant q2" data-name="藍色 右上" data-color="blue" type="button">
+          <span>右上</span>
+          <strong>藍色</strong>
+        </button>
+        <button class="quadrant q3" data-name="黃色 左下" data-color="yellow" type="button">
+          <span>左下</span>
+          <strong>黃色</strong>
+        </button>
+        <button class="quadrant q4" data-name="綠色 右下" data-color="green" type="button">
+          <span>右下</span>
+          <strong>綠色</strong>
+        </button>
+      </div>
+    </section>
+
+    <section class="hint-panel">
+      <div class="hint-card">
+        <span class="hint-label">這回合目標</span>
+        <strong id="roundHint">還沒開始</strong>
+      </div>
+      <div class="hint-card">
+        <span class="hint-label">玩法建議</span>
+        <p>大人可以喊「預備，踩」，等區塊暗掉後再請孩子回到中間等待下一輪。</p>
+      </div>
+    </section>
+  </main>
+
+  <script src="./script.js"></script>
+</body>
+</html>

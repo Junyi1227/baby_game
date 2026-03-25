@@ -1,0 +1,330 @@
+@import url("https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;600;700&family=Comic+Neue:wght@400;700&display=swap");
+
+:root {
+  --bg-1: #fff7cf;
+  --bg-2: #cdefff;
+  --ink: #26344f;
+  --card: rgba(255, 255, 255, 0.84);
+  --line: rgba(38, 52, 79, 0.08);
+  --red: #ff6b6b;
+  --blue: #5aa9ff;
+  --yellow: #ffd84d;
+  --green: #66d38a;
+  --inactive: #e7edf5;
+  --shadow: 0 22px 44px rgba(38, 52, 79, 0.14);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  color: var(--ink);
+  font-family: "Comic Neue", sans-serif;
+  background:
+    radial-gradient(circle at 10% 20%, rgba(255, 255, 255, 0.92), transparent 24%),
+    radial-gradient(circle at 90% 10%, rgba(255, 180, 120, 0.3), transparent 20%),
+    radial-gradient(circle at 15% 90%, rgba(80, 180, 255, 0.24), transparent 24%),
+    linear-gradient(180deg, var(--bg-1), var(--bg-2));
+}
+
+button,
+input {
+  font: inherit;
+}
+
+.app-shell {
+  width: min(1200px, 100%);
+  margin: 0 auto;
+  padding: 20px;
+  display: grid;
+  gap: 20px;
+}
+
+.topbar,
+.controls,
+.hint-panel {
+  background: var(--card);
+  border: 3px solid rgba(255, 255, 255, 0.92);
+  border-radius: 28px;
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(8px);
+}
+
+.topbar {
+  padding: 22px;
+  display: grid;
+  gap: 16px;
+}
+
+.back-link {
+  width: fit-content;
+  padding: 10px 14px;
+  border-radius: 999px;
+  text-decoration: none;
+  color: var(--ink);
+  font-weight: 700;
+  background: #fff;
+  box-shadow: 0 10px 20px rgba(38, 52, 79, 0.08);
+}
+
+.eyebrow {
+  margin: 0 0 6px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #ff7a59;
+}
+
+.title-group h1 {
+  margin: 0;
+  font-family: "Baloo 2", cursive;
+  font-size: clamp(2.3rem, 5vw, 4.4rem);
+  line-height: 0.92;
+}
+
+.subtitle {
+  margin: 10px 0 0;
+  font-size: clamp(1rem, 2vw, 1.25rem);
+  line-height: 1.6;
+}
+
+.controls {
+  padding: 18px;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 16px;
+  align-items: center;
+}
+
+.primary-btn,
+.secondary-btn {
+  border: 0;
+  cursor: pointer;
+  min-height: 68px;
+  border-radius: 22px;
+  padding: 16px 18px;
+  font-family: "Baloo 2", cursive;
+  font-size: 1.5rem;
+  transition: transform 180ms ease, box-shadow 180ms ease;
+}
+
+.primary-btn {
+  background: linear-gradient(135deg, #ff7a59, #ff9d4d);
+  color: #fff;
+  box-shadow: 0 16px 28px rgba(255, 122, 89, 0.28);
+}
+
+.secondary-btn {
+  background: linear-gradient(135deg, #3cb6a2, #66d38a);
+  color: #fff;
+  box-shadow: 0 16px 28px rgba(60, 182, 162, 0.26);
+}
+
+.primary-btn:hover,
+.primary-btn:focus-visible,
+.secondary-btn:hover,
+.secondary-btn:focus-visible {
+  transform: translateY(-2px);
+}
+
+.primary-btn:hover,
+.primary-btn:focus-visible {
+  box-shadow: 0 20px 34px rgba(255, 122, 89, 0.32);
+}
+
+.secondary-btn:hover,
+.secondary-btn:focus-visible {
+  box-shadow: 0 20px 34px rgba(60, 182, 162, 0.3);
+}
+
+.secondary-btn.is-active {
+  background: linear-gradient(135deg, #24324a, #3b4c6b);
+  box-shadow: 0 20px 34px rgba(36, 50, 74, 0.22);
+}
+
+.speed-control,
+.status-card,
+.hint-card {
+  min-height: 68px;
+  padding: 14px 16px;
+  border-radius: 22px;
+  background: #fff;
+  border: 1px solid var(--line);
+}
+
+.speed-control {
+  display: grid;
+  gap: 10px;
+  font-weight: 700;
+}
+
+.speed-control input {
+  width: 100%;
+}
+
+.status-card {
+  display: grid;
+  align-content: center;
+  gap: 6px;
+}
+
+.status-label,
+.hint-label {
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: rgba(38, 52, 79, 0.72);
+}
+
+.board-wrap {
+  position: relative;
+}
+
+.board {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 18px;
+  min-height: min(72vh, 760px);
+}
+
+.quadrant {
+  border: 0;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  border-radius: 34px;
+  padding: 20px;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 220px;
+  color: rgba(38, 52, 79, 0.42);
+  background: linear-gradient(135deg, #f3f6fa, #e2e8f0);
+  box-shadow: inset 0 0 0 2px rgba(255, 255, 255, 0.7);
+  transition: transform 220ms ease, background 220ms ease, color 220ms ease, box-shadow 220ms ease;
+}
+
+.quadrant::after {
+  content: "";
+  position: absolute;
+  inset: auto -40px -40px auto;
+  width: 160px;
+  height: 160px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.26);
+  transform: scale(0.9);
+}
+
+.quadrant span,
+.quadrant strong {
+  position: relative;
+  z-index: 1;
+}
+
+.quadrant span {
+  font-size: clamp(1.25rem, 2vw, 1.6rem);
+  font-weight: 700;
+}
+
+.quadrant strong {
+  font-family: "Baloo 2", cursive;
+  font-size: clamp(2.4rem, 5vw, 4rem);
+  line-height: 1;
+}
+
+.quadrant.active {
+  transform: scale(1.01);
+  color: #1d2940;
+  box-shadow:
+    0 22px 34px rgba(38, 52, 79, 0.18),
+    inset 0 0 0 4px rgba(255, 255, 255, 0.62);
+  animation: pulse 560ms ease-in-out infinite alternate;
+}
+
+.quadrant.active[data-color="red"] {
+  background: linear-gradient(135deg, #ff9b9b, var(--red));
+}
+
+.quadrant.active[data-color="blue"] {
+  background: linear-gradient(135deg, #9bd4ff, var(--blue));
+}
+
+.quadrant.active[data-color="yellow"] {
+  background: linear-gradient(135deg, #ffe992, var(--yellow));
+}
+
+.quadrant.active[data-color="green"] {
+  background: linear-gradient(135deg, #a7efbf, var(--green));
+}
+
+.hint-panel {
+  padding: 18px;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.hint-card {
+  display: grid;
+  gap: 6px;
+  align-content: start;
+}
+
+.hint-card p,
+.hint-card strong {
+  margin: 0;
+  font-size: 1.12rem;
+  line-height: 1.5;
+}
+
+@keyframes pulse {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(1.02);
+  }
+}
+
+@media (max-width: 860px) {
+  .controls,
+  .hint-panel {
+    grid-template-columns: 1fr;
+  }
+
+  .board {
+    min-height: auto;
+  }
+
+  .quadrant {
+    min-height: 180px;
+  }
+}
+
+@media (max-width: 640px) {
+  .app-shell {
+    padding: 14px;
+  }
+
+  .board {
+    gap: 12px;
+  }
+
+  .quadrant {
+    border-radius: 24px;
+    min-height: 150px;
+    padding: 16px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}

@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Baby Game Playground</title>
+  <style>
+    @import url("https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;600;700&family=Comic+Neue:wght@400;700&display=swap");
+
+    :root {
+      --bg-top: #fff8d6;
+      --bg-bottom: #dff6ff;
+      --card: rgba(255, 255, 255, 0.88);
+      --text: #24324a;
+      --accent: #ff7a59;
+      --accent-2: #3cb6a2;
+      --shadow: 0 18px 40px rgba(36, 50, 74, 0.14);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: "Comic Neue", sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at top left, rgba(255, 255, 255, 0.9), transparent 30%),
+        radial-gradient(circle at right 20%, rgba(255, 160, 122, 0.25), transparent 24%),
+        linear-gradient(180deg, var(--bg-top), var(--bg-bottom));
+      display: grid;
+      place-items: center;
+      padding: 24px;
+    }
+
+    main {
+      width: min(920px, 100%);
+      background: var(--card);
+      border: 4px solid rgba(255, 255, 255, 0.9);
+      border-radius: 32px;
+      box-shadow: var(--shadow);
+      padding: 32px;
+      backdrop-filter: blur(10px);
+    }
+
+    h1 {
+      margin: 0 0 12px;
+      font-family: "Baloo 2", cursive;
+      font-size: clamp(2.2rem, 6vw, 4rem);
+      line-height: 0.95;
+    }
+
+    p {
+      margin: 0;
+      font-size: clamp(1.05rem, 2.5vw, 1.3rem);
+      line-height: 1.6;
+    }
+
+    .hero {
+      display: grid;
+      gap: 24px;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      width: fit-content;
+      padding: 10px 16px;
+      border-radius: 999px;
+      background: #fff;
+      font-weight: 700;
+      color: var(--accent-2);
+      box-shadow: 0 8px 20px rgba(60, 182, 162, 0.16);
+    }
+
+    .games {
+      margin-top: 28px;
+      display: grid;
+      gap: 18px;
+    }
+
+    .game-card {
+      display: grid;
+      gap: 14px;
+      padding: 22px;
+      border-radius: 24px;
+      background: linear-gradient(135deg, #ffffff, #fff0e9);
+      border: 2px solid rgba(255, 122, 89, 0.16);
+    }
+
+    .game-card h2 {
+      margin: 0;
+      font-family: "Baloo 2", cursive;
+      font-size: 2rem;
+      line-height: 1;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: fit-content;
+      padding: 14px 22px;
+      border-radius: 16px;
+      background: var(--accent);
+      color: #fff;
+      font-weight: 700;
+      text-decoration: none;
+      box-shadow: 0 12px 22px rgba(255, 122, 89, 0.28);
+      transition: transform 180ms ease, box-shadow 180ms ease;
+    }
+
+    .button:hover,
+    .button:focus-visible {
+      transform: translateY(-2px) scale(1.01);
+      box-shadow: 0 16px 30px rgba(255, 122, 89, 0.32);
+    }
+
+    .future {
+      margin-top: 24px;
+      padding: 18px 20px;
+      border-radius: 20px;
+      background: rgba(60, 182, 162, 0.1);
+      font-weight: 700;
+    }
+
+    @media (max-width: 640px) {
+      main {
+        padding: 24px;
+        border-radius: 24px;
+      }
+
+      .game-card h2 {
+        font-size: 1.6rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <section class="hero">
+      <span class="pill">Baby Game Playground</span>
+      <h1>給小朋友玩的<br>踩色塊遊戲集合</h1>
+      <p>這裡先放第一個原型遊戲，之後你可以繼續把別的玩法放進來，維持同一個入口頁管理。</p>
+    </section>
+
+    <section class="games" aria-label="遊戲列表">
+      <article class="game-card">
+        <h2>隨機顏色踩踏</h2>
+        <p>畫面四等份，隨機亮出 1 到 2 個顏色區塊，小朋友依照位置去踩實體巧拼。</p>
+        <a class="button" href="./games/random-color-step/index.html">進入遊戲</a>
+      </article>
+    </section>
+
+    <div class="future">之後新遊戲建議直接新增在 `games/` 裡，每個遊戲一個獨立資料夾。</div>
+  </main>
+</body>
+</html>
