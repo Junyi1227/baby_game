@@ -7,6 +7,7 @@
   <link rel="stylesheet" href="./styles.css">
 </head>
 <body>
+  <button id="controlPeekBtn" class="control-peek-btn" type="button" aria-label="顯示控制列" aria-expanded="false">控制</button>
   <main class="app-shell">
     <section class="topbar">
       <a class="back-link" href="../../index.html">返回遊戲入口</a>
@@ -20,6 +21,7 @@
     <section class="controls" aria-label="遊戲控制">
       <button id="nextRoundBtn" class="primary-btn" type="button">開始下一回合</button>
       <button id="autoModeBtn" class="secondary-btn" type="button" aria-pressed="false">開啟自動連續</button>
+      <button id="fullscreenBtn" class="secondary-btn fullscreen-btn" type="button" aria-pressed="false">進入全螢幕</button>
       <label class="speed-control" for="hideDelay">
         顯示秒數
         <input id="hideDelay" type="range" min="1" max="6" step="1" value="3">

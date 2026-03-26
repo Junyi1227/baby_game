@@ -9,11 +9,13 @@
 
     :root {
       --bg-top: #fff8d6;
-      --bg-bottom: #dff6ff;
-      --card: rgba(255, 255, 255, 0.88);
+      --bg-bottom: #d9f3ff;
       --text: #24324a;
+      --card: rgba(255, 255, 255, 0.88);
       --accent: #ff7a59;
-      --accent-2: #3cb6a2;
+      --accent-2: #32b09a;
+      --accent-3: #5d78ff;
+      --line: rgba(36, 50, 74, 0.1);
       --shadow: 0 18px 40px rgba(36, 50, 74, 0.14);
     }
 
@@ -27,57 +29,113 @@
       font-family: "Comic Neue", sans-serif;
       color: var(--text);
       background:
-        radial-gradient(circle at top left, rgba(255, 255, 255, 0.9), transparent 30%),
-        radial-gradient(circle at right 20%, rgba(255, 160, 122, 0.25), transparent 24%),
+        radial-gradient(circle at top left, rgba(255, 255, 255, 0.95), transparent 28%),
+        radial-gradient(circle at right 12%, rgba(255, 160, 122, 0.22), transparent 20%),
+        radial-gradient(circle at left 80%, rgba(93, 120, 255, 0.16), transparent 22%),
         linear-gradient(180deg, var(--bg-top), var(--bg-bottom));
-      display: grid;
-      place-items: center;
       padding: 24px;
     }
 
     main {
-      width: min(920px, 100%);
-      background: var(--card);
-      border: 4px solid rgba(255, 255, 255, 0.9);
-      border-radius: 32px;
-      box-shadow: var(--shadow);
-      padding: 32px;
-      backdrop-filter: blur(10px);
-    }
-
-    h1 {
-      margin: 0 0 12px;
-      font-family: "Baloo 2", cursive;
-      font-size: clamp(2.2rem, 6vw, 4rem);
-      line-height: 0.95;
-    }
-
-    p {
-      margin: 0;
-      font-size: clamp(1.05rem, 2.5vw, 1.3rem);
-      line-height: 1.6;
-    }
-
-    .hero {
+      width: min(1120px, 100%);
+      margin: 0 auto;
       display: grid;
       gap: 24px;
     }
 
+    .hero,
+    .section-card {
+      background: var(--card);
+      border: 4px solid rgba(255, 255, 255, 0.9);
+      border-radius: 32px;
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(10px);
+    }
+
+    .hero {
+      padding: 32px;
+      display: grid;
+      grid-template-columns: minmax(0, 1.4fr) minmax(280px, 0.8fr);
+      gap: 24px;
+      align-items: stretch;
+    }
+
+    .hero-copy {
+      display: grid;
+      gap: 18px;
+    }
+
     .pill {
       display: inline-flex;
-      align-items: center;
       width: fit-content;
       padding: 10px 16px;
       border-radius: 999px;
       background: #fff;
-      font-weight: 700;
       color: var(--accent-2);
-      box-shadow: 0 8px 20px rgba(60, 182, 162, 0.16);
+      font-weight: 700;
+      box-shadow: 0 8px 20px rgba(50, 176, 154, 0.14);
     }
 
-    .games {
-      margin-top: 28px;
+    h1,
+    h2,
+    h3 {
+      margin: 0;
+      font-family: "Baloo 2", cursive;
+      line-height: 0.95;
+    }
+
+    h1 {
+      font-size: clamp(2.5rem, 6vw, 4.8rem);
+    }
+
+    p {
+      margin: 0;
+      line-height: 1.6;
+      font-size: clamp(1rem, 2vw, 1.2rem);
+    }
+
+    .hero-stats {
       display: grid;
+      gap: 14px;
+      align-content: start;
+    }
+
+    .stat-card {
+      padding: 18px;
+      border-radius: 24px;
+      background: linear-gradient(135deg, #fff, #fff4ef);
+      border: 1px solid rgba(255, 122, 89, 0.14);
+    }
+
+    .stat-card strong {
+      display: block;
+      font-family: "Baloo 2", cursive;
+      font-size: 2rem;
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+
+    .section-card {
+      padding: 26px;
+      display: grid;
+      gap: 18px;
+    }
+
+    .section-head {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .section-head p {
+      color: rgba(36, 50, 74, 0.74);
+    }
+
+    .games-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
       gap: 18px;
     }
 
@@ -85,55 +143,141 @@
       display: grid;
       gap: 14px;
       padding: 22px;
-      border-radius: 24px;
+      border-radius: 26px;
+      border: 1px solid var(--line);
+      background: linear-gradient(135deg, #fff, #f8fbff);
+    }
+
+    .game-card.live {
       background: linear-gradient(135deg, #ffffff, #fff0e9);
-      border: 2px solid rgba(255, 122, 89, 0.16);
+      border-color: rgba(255, 122, 89, 0.16);
     }
 
-    .game-card h2 {
-      margin: 0;
-      font-family: "Baloo 2", cursive;
-      font-size: 2rem;
-      line-height: 1;
+    .game-card.mock {
+      background: linear-gradient(135deg, #ffffff, #eef7ff);
     }
 
-    .button {
+    .game-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      min-height: 34px;
+      padding: 6px 12px;
+      border-radius: 999px;
+      font-weight: 700;
+      font-size: 0.95rem;
+    }
+
+    .tag.live {
+      background: rgba(255, 122, 89, 0.14);
+      color: #d95d3b;
+    }
+
+    .tag.mock {
+      background: rgba(93, 120, 255, 0.12);
+      color: #4666ff;
+    }
+
+    .meta {
+      font-size: 0.96rem;
+      color: rgba(36, 50, 74, 0.72);
+      font-weight: 700;
+    }
+
+    .features {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      min-height: 34px;
+      padding: 6px 12px;
+      border-radius: 999px;
+      background: #fff;
+      border: 1px solid var(--line);
+      font-weight: 700;
+      font-size: 0.94rem;
+    }
+
+    .button,
+    .ghost {
       display: inline-flex;
       align-items: center;
       justify-content: center;
       width: fit-content;
-      padding: 14px 22px;
+      min-height: 48px;
+      padding: 12px 18px;
       border-radius: 16px;
-      background: var(--accent);
-      color: #fff;
-      font-weight: 700;
       text-decoration: none;
-      box-shadow: 0 12px 22px rgba(255, 122, 89, 0.28);
+      font-weight: 700;
       transition: transform 180ms ease, box-shadow 180ms ease;
     }
 
-    .button:hover,
-    .button:focus-visible {
-      transform: translateY(-2px) scale(1.01);
-      box-shadow: 0 16px 30px rgba(255, 122, 89, 0.32);
+    .button {
+      background: var(--accent);
+      color: #fff;
+      box-shadow: 0 12px 22px rgba(255, 122, 89, 0.28);
     }
 
-    .future {
-      margin-top: 24px;
-      padding: 18px 20px;
-      border-radius: 20px;
-      background: rgba(60, 182, 162, 0.1);
-      font-weight: 700;
+    .button:hover,
+    .button:focus-visible,
+    .ghost:hover,
+    .ghost:focus-visible {
+      transform: translateY(-2px) scale(1.01);
+    }
+
+    .ghost {
+      background: #fff;
+      color: var(--accent-3);
+      border: 1px solid rgba(93, 120, 255, 0.16);
+      box-shadow: 0 10px 18px rgba(93, 120, 255, 0.1);
+    }
+
+    .roadmap {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .roadmap-card {
+      padding: 18px;
+      border-radius: 22px;
+      background: rgba(255, 255, 255, 0.76);
+      border: 1px dashed rgba(36, 50, 74, 0.16);
+    }
+
+    .roadmap-card h3 {
+      font-size: 1.6rem;
+      margin-bottom: 8px;
+    }
+
+    @media (max-width: 900px) {
+      .hero,
+      .games-grid,
+      .roadmap {
+        grid-template-columns: 1fr;
+      }
     }
 
     @media (max-width: 640px) {
-      main {
-        padding: 24px;
-        border-radius: 24px;
+      body {
+        padding: 14px;
       }
 
-      .game-card h2 {
-        font-size: 1.6rem;
+      .hero,
+      .section-card {
+        border-radius: 24px;
+        padding: 20px;
       }
     }
   </style>
@@ -141,20 +285,131 @@
 <body>
   <main>
     <section class="hero">
-      <span class="pill">Baby Game Playground</span>
-      <h1>給小朋友玩的<br>踩色塊遊戲集合</h1>
-      <p>這裡先放第一個原型遊戲，之後你可以繼續把別的玩法放進來，維持同一個入口頁管理。</p>
+      <div class="hero-copy">
+        <span class="pill">Baby Game Playground</span>
+        <h1>給小朋友玩的<br>互動遊戲首頁</h1>
+        <p>這裡集中管理每一款小遊戲。現在有 1 款可以直接玩，其他先放幾個示意項目，之後你可以依樣新增到 `games/` 裡。</p>
+        <a class="button" href="./games/random-color-step/index.html">直接開始第一款遊戲</a>
+      </div>
+
+      <div class="hero-stats">
+        <div class="stat-card">
+          <strong>1</strong>
+          <p>目前可玩遊戲</p>
+        </div>
+        <div class="stat-card">
+          <strong>3</strong>
+          <p>示意中的下一款玩法</p>
+        </div>
+        <div class="stat-card">
+          <strong>HTML + JS</strong>
+          <p>目前維持簡單、好改、好擴充</p>
+        </div>
+      </div>
     </section>
 
-    <section class="games" aria-label="遊戲列表">
-      <article class="game-card">
-        <h2>隨機顏色踩踏</h2>
-        <p>畫面四等份，隨機亮出 1 到 2 個顏色區塊，小朋友依照位置去踩實體巧拼。</p>
-        <a class="button" href="./games/random-color-step/index.html">進入遊戲</a>
-      </article>
+    <section class="section-card" aria-labelledby="live-games-title">
+      <div class="section-head">
+        <div>
+          <h2 id="live-games-title">目前可玩</h2>
+          <p>真的能打開操作的遊戲會放在這一區。</p>
+        </div>
+      </div>
+
+      <div class="games-grid">
+        <article class="game-card live">
+          <div class="game-top">
+            <h3>隨機顏色踩踏</h3>
+            <span class="tag live">可遊玩</span>
+          </div>
+          <p>畫面分成四等份，隨機亮出 1 到 2 個顏色區塊，孩子照著出現的位置踩實體巧拼。</p>
+          <div class="features">
+            <span class="chip">四分割畫面</span>
+            <span class="chip">自動連續模式</span>
+            <span class="chip">全螢幕專注模式</span>
+          </div>
+          <div class="meta">適合先做反應力與顏色位置辨識。</div>
+          <a class="button" href="./games/random-color-step/index.html">進入遊戲</a>
+        </article>
+      </div>
     </section>
 
-    <div class="future">之後新遊戲建議直接新增在 `games/` 裡，每個遊戲一個獨立資料夾。</div>
+    <section class="section-card" aria-labelledby="mock-games-title">
+      <div class="section-head">
+        <div>
+          <h2 id="mock-games-title">下一批示意</h2>
+          <p>這幾款先當首頁版型示意，之後有空再真的做。</p>
+        </div>
+      </div>
+
+      <div class="games-grid">
+        <article class="game-card mock">
+          <div class="game-top">
+            <h3>動物聲音配對</h3>
+            <span class="tag mock">示意</span>
+          </div>
+          <p>播放一個動物聲音，孩子要踩對應的動物圖卡，適合之後加圖片與音效。</p>
+          <div class="features">
+            <span class="chip">聲音辨識</span>
+            <span class="chip">圖片配對</span>
+          </div>
+          <div class="meta">目前還沒有實作頁面。</div>
+          <span class="ghost">準備中</span>
+        </article>
+
+        <article class="game-card mock">
+          <div class="game-top">
+            <h3>節奏跟拍</h3>
+            <span class="tag mock">示意</span>
+          </div>
+          <p>畫面依節奏亮燈，小朋友跟著燈號順序踩踏，後面可以加入快慢速度。</p>
+          <div class="features">
+            <span class="chip">節奏感</span>
+            <span class="chip">順序記憶</span>
+          </div>
+          <div class="meta">適合延伸成難度分級。</div>
+          <span class="ghost">準備中</span>
+        </article>
+
+        <article class="game-card mock">
+          <div class="game-top">
+            <h3>數字跳跳樂</h3>
+            <span class="tag mock">示意</span>
+          </div>
+          <p>螢幕顯示數字或簡單加減，小朋友踩出正確答案區塊，偏向認知練習。</p>
+          <div class="features">
+            <span class="chip">數字認知</span>
+            <span class="chip">動作回應</span>
+          </div>
+          <div class="meta">之後可接題庫或語音報題。</div>
+          <span class="ghost">準備中</span>
+        </article>
+      </div>
+    </section>
+
+    <section class="section-card" aria-labelledby="roadmap-title">
+      <div class="section-head">
+        <div>
+          <h2 id="roadmap-title">後續建議</h2>
+          <p>首頁先把方向整理好，後面擴充比較不會亂。</p>
+        </div>
+      </div>
+
+      <div class="roadmap">
+        <article class="roadmap-card">
+          <h3>每款一個資料夾</h3>
+          <p>統一放在 `games/遊戲名稱/`，每款遊戲各自有 `index.html`、`script.js`、`styles.css`。</p>
+        </article>
+        <article class="roadmap-card">
+          <h3>首頁只放清單</h3>
+          <p>把描述、狀態、玩法亮點列清楚，真正的操作都留在各遊戲頁面。</p>
+        </article>
+        <article class="roadmap-card">
+          <h3>之後可加縮圖</h3>
+          <p>如果遊戲變多，首頁可以再加封面圖或分類，例如顏色、節奏、數字、動物。</p>
+        </article>
+      </div>
+    </section>
   </main>
 </body>
 </html>

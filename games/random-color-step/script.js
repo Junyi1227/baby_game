@@ -1,6 +1,8 @@
 const quadrants = Array.from(document.querySelectorAll(".quadrant"));
 const nextRoundBtn = document.getElementById("nextRoundBtn");
 const autoModeBtn = document.getElementById("autoModeBtn");
+const fullscreenBtn = document.getElementById("fullscreenBtn");
+const controlPeekBtn = document.getElementById("controlPeekBtn");
 const statusText = document.getElementById("statusText");
 const roundHint = document.getElementById("roundHint");
 const hideDelayInput = document.getElementById("hideDelay");
@@ -10,8 +12,43 @@ const roundGapValue = document.getElementById("roundGapValue");
 
 let hideTimer = null;
 let autoNextTimer = null;
+let controlsHideTimer = null;
 let roundNumber = 0;
 let isAutoMode = false;
+const controlsAutoHideDelay = 3000;
+
+async function ensureFullscreen() {
+  if (document.fullscreenElement) {
+    return true;
+  }
+
+  try {
+    await document.documentElement.requestFullscreen();
+    return true;
+  } catch (error) {
+    return false;
+  }
+}
+
+function updateFullscreenUi() {
+  const isFullscreen = Boolean(document.fullscreenElement);
+  document.body.classList.toggle("fullscreen-mode", isFullscreen);
+  fullscreenBtn.classList.toggle("is-active", isFullscreen);
+  fullscreenBtn.setAttribute("aria-pressed", String(isFullscreen));
+  fullscreenBtn.textContent = isFullscreen ? "離開全螢幕" : "進入全螢幕";
+  controlPeekBtn.setAttribute("aria-expanded", String(document.body.classList.contains("controls-visible")));
+
+  if (isFullscreen) {
+    showControlsTemporarily();
+    return;
+  }
+
+  document.body.classList.remove("controls-visible");
+  if (controlsHideTimer) {
+    window.clearTimeout(controlsHideTimer);
+    controlsHideTimer = null;
+  }
+}
 
 function updateDelayLabel() {
   hideDelayValue.textContent = `${hideDelayInput.value} 秒`;
@@ -35,6 +72,31 @@ function clearTimers() {
     window.clearTimeout(autoNextTimer);
     autoNextTimer = null;
   }
+}
+
+function scheduleControlsHide() {
+  if (!document.fullscreenElement) {
+    return;
+  }
+
+  if (controlsHideTimer) {
+    window.clearTimeout(controlsHideTimer);
+  }
+
+  controlsHideTimer = window.setTimeout(() => {
+    document.body.classList.remove("controls-visible");
+    controlPeekBtn.setAttribute("aria-expanded", "false");
+  }, controlsAutoHideDelay);
+}
+
+function showControlsTemporarily() {
+  if (!document.fullscreenElement) {
+    return;
+  }
+
+  document.body.classList.add("controls-visible");
+  controlPeekBtn.setAttribute("aria-expanded", "true");
+  scheduleControlsHide();
 }
 
 function pickTargets() {
@@ -97,11 +159,41 @@ function setAutoMode(active) {
   startRound();
 }
 
-nextRoundBtn.addEventListener("click", startRound);
+nextRoundBtn.addEventListener("click", async () => {
+  await ensureFullscreen();
+  startRound();
+});
 hideDelayInput.addEventListener("input", updateDelayLabel);
 roundGapInput.addEventListener("input", updateGapLabel);
 autoModeBtn.addEventListener("click", () => {
   setAutoMode(!isAutoMode);
+});
+fullscreenBtn.addEventListener("click", async () => {
+  if (document.fullscreenElement) {
+    await document.exitFullscreen();
+    return;
+  }
+
+  const entered = await ensureFullscreen();
+  if (!entered) {
+    statusText.textContent = "瀏覽器擋住全螢幕，請再按一次或改用桌機瀏覽器";
+  }
+});
+document.addEventListener("fullscreenchange", updateFullscreenUi);
+document.addEventListener("mousemove", () => {
+  if (document.fullscreenElement) {
+    showControlsTemporarily();
+  }
+});
+document.addEventListener("touchstart", () => {
+  if (document.fullscreenElement) {
+    showControlsTemporarily();
+  }
+}, { passive: true });
+controlPeekBtn.addEventListener("click", () => {
+  if (document.fullscreenElement) {
+    showControlsTemporarily();
+  }
 });
 
 quadrants.forEach((quadrant) => {
@@ -112,3 +204,4 @@ quadrants.forEach((quadrant) => {
 
 updateDelayLabel();
 updateGapLabel();
+updateFullscreenUi();
