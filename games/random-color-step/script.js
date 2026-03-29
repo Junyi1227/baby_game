@@ -50,12 +50,17 @@ function updateFullscreenUi() {
   }
 }
 
+function formatSeconds(value) {
+  const seconds = Number(value);
+  return Number.isInteger(seconds) ? String(seconds) : seconds.toFixed(1);
+}
+
 function updateDelayLabel() {
-  hideDelayValue.textContent = `${hideDelayInput.value} 秒`;
+  hideDelayValue.textContent = `${formatSeconds(hideDelayInput.value)} 秒`;
 }
 
 function updateGapLabel() {
-  roundGapValue.textContent = `${roundGapInput.value} 秒`;
+  roundGapValue.textContent = `${formatSeconds(roundGapInput.value)} 秒`;
 }
 
 function clearBoard() {
